@@ -37,7 +37,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{cartItemCount}}</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -107,7 +107,12 @@
                                 <div class="product__item__pic set-bg">
                                     <img v-bind:src="product.image">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <button v-on:click="addToCart(product)">
+                                                Add Item To Cart
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </button>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -144,11 +149,21 @@
             data: {
                 sitename: "CW-CST3145",
                 products: products,
+                cart:[],
 
 
             },
-
-
+            methods: {
+                addToCart(product) {
+                    this.cart.push(product.subjectId); 
+                },
+            },
+            computed: {
+                cartItemCount() {
+                    return this.cart.length;
+                },
+            },
+            
 
         });
 
