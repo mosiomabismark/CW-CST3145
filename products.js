@@ -10,7 +10,7 @@ let products = [
 
     {
         subjectId: 2,
-        image: "img/product/vmware.png",
+        image: "img/product/vmware.jpg",
         subject: "vmware",
         location: "Malta",
         price: "$750",
@@ -63,7 +63,7 @@ let products = [
     },
 
     {
-        subjectId: 10,
+        subjectId: 8,
         image: "img/product/a.png",
         subject: "A+",
         location: "Malta",

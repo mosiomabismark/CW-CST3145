@@ -108,7 +108,7 @@
                                     <img v-bind:src="product.image">
                                     <ul class="product__item__pic__hover">
                                         <li>
-                                            <button v-on:click="addToCart(product)">
+                                            <button v-on:click="addToCart(product)" v-if="canAddToCart(product)">
                                                 Add Item To Cart
                                                 <i class="fa fa-shopping-cart"></i>
                                             </button>
@@ -119,7 +119,7 @@
                                     <h6>{{product.subject}}</h6>
                                     <h6>{{product.location}}</h6>
                                     <h6>{{product.price}}</h6>
-                                    <h6>{{product.stock}} left</h6>
+                                    <h6>{{product.stock - cartCount(product.subjectId)}} left</h6>
                                     
                                 </div>
                             </div>
@@ -154,9 +154,21 @@
 
             },
             methods: {
-                addToCart(product) {
-                    this.cart.push(product.subjectId); 
+                addToCart(product){
+                    this.cart.push(product.subjectId);
                 },
+                canAddToCart(product) {
+                    return product.stock > this.cartCount(product.subjectId);
+                },
+                cartCount(subjectId) {
+                    let count = 0;
+                    for (let i = 0; i < this.cart.length; i++) {
+                        if (this.cart[i] === subjectId) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
             },
             computed: {
                 cartItemCount() {
