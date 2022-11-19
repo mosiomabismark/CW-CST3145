@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="products.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <h3>CW-CST3145</h3>
+                    <h3>{{sitename}}</h3>
                 </div>
                 <div class="col-lg-6">
                 </div>
@@ -99,23 +100,27 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6" v-for="product in products">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                <div class="product__item__pic set-bg">
+                                    <img v-bind:src="product.image">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6>Subject</h6>
-                                    <h6>Location</h6>
-                                    <h6>$30.00</h6>
-                                    <h6>stock</h6>
+                                    <h6>{{product.subject}}</h6>
+                                    <h6>{{product.location}}</h6>
+                                    <h6>{{product.price}}</h6>
+                                    <h6>{{product.stock}} left</h6>
                                     
                                 </div>
                             </div>
                         </div>
+                    </div>
+                        |
                 </div>
             </div>
         </div>
@@ -123,8 +128,6 @@
     <!-- Product Section End -->   
     
     </div>
-
-
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -135,7 +138,21 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript">
+        let webstore = new Vue({
+            el: "#app",
+            data: {
+                sitename: "CW-CST3145",
+                products: products,
 
+
+            },
+
+
+
+        });
+
+    </script>
 
 
 </body>
