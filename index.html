@@ -14,13 +14,12 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
-    <script src="products.js"></script>
+    <script src="lessons.js"></script>
 </head>
 
 <body>
@@ -75,9 +74,9 @@
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>Filter By</h4>
-                            <input type="checkbox" id="ascending" name="ascending" value="ascending">
+                            <input type="radio" id="ascending" name="ascending" value="ascending" v-model="filterItem">
                             <label for="ascending"> Ascending</label><br>
-                            <input type="checkbox" id="descending" name="descending" value="descending">
+                            <input type="radio" id="descending" name="descending" value="descending" v-model="filterItem">
                             <label for="descending">Descending</label><br>
                         </div>
                     </div>
@@ -88,9 +87,11 @@
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Sort By</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                    <select v-model="sortItem">
+                                        <option value="subject">Subject</option>
+                                        <option value="price">Price</option>
+                                        <option value="location">Location</option>
+                                        <option value="stock">Stock</option>
                                     </select>
                                 </div>
                             </div>
@@ -100,15 +101,15 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6" v-for="product in products">
+                        <div class="col-lg-4 col-md-6 col-sm-6" v-for="lesson in sortLessons">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg">
-                                    <img v-bind:src="product.image">
+                                    <img v-bind:src="lesson.image">
                                     <ul class="product__item__pic__hover">
                                         <li>
-                                            <button v-on:click="addToCart(product)" v-if="canAddToCart(product)">
+                                            <button v-on:click="addToCart(lesson)" v-if="canAddToCart(lesson)">
                                                 Add Item To Cart
                                                 <i class="fa fa-shopping-cart"></i>
                                             </button>
@@ -116,10 +117,10 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6>{{product.subject}}</h6>
-                                    <h6>{{product.location}}</h6>
-                                    <h6>{{product.price}}</h6>
-                                    <h6>{{product.stock - cartCount(product.subjectId)}} left</h6>
+                                    <h6>{{lesson.subject}}</h6>
+                                    <h6>{{lesson.location}}</h6>
+                                    <h6>${{lesson.price}}</h6>
+                                    <h6>{{lesson.stock - cartCount(lesson.subjectId)}} left</h6>
                                     
                                 </div>
                             </div>
@@ -137,7 +138,6 @@
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/mixitup.min.js"></script>
@@ -148,17 +148,18 @@
             el: "#app",
             data: {
                 sitename: "CW-CST3145",
-                products: products,
+                lessons: lessons,
                 cart:[],
-
+                sortItem: "",
+                filterItem: "ascending"
 
             },
             methods: {
-                addToCart(product){
-                    this.cart.push(product.subjectId);
+                addToCart(lesson){
+                    this.cart.push(lesson.subjectId);
                 },
-                canAddToCart(product) {
-                    return product.stock > this.cartCount(product.subjectId);
+                canAddToCart(lesson) {
+                    return lesson.stock > this.cartCount(lesson.subjectId);
                 },
                 cartCount(subjectId) {
                     let count = 0;
@@ -174,6 +175,22 @@
                 cartItemCount() {
                     return this.cart.length;
                 },
+                sortLessons(){
+                    let lessonsArr = this.lessons.slice(0);
+                    const compare = (a, b) => {
+                        if (a[this.sortItem] > b[this.sortItem])
+                            return 1;
+                        if (a[this.sortItem] < b[this.sortItem])
+                            return -1;
+                        return 0;
+                    };
+                    if (this.filterItem === "descending") {
+                        lessonsArr.sort(compare);
+                        return lessonsArr.reverse();
+                    } else {
+                        return lessonsArr.sort(compare);
+                    }
+                }
             },
             
 

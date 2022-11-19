@@ -1,10 +1,10 @@
-let products = [
+let lessons = [
     {
         subjectId: 1,
         image: "img/product/kubernetes.png",
         subject: "kubernetes",
         location: "Dubai",
-        price: "$900",
+        price: 900,
         stock: 10,
     },
 
@@ -13,7 +13,7 @@ let products = [
         image: "img/product/vmware.jpg",
         subject: "vmware",
         location: "Malta",
-        price: "$750",
+        price: 750,
         stock: 10,
     },
 
@@ -22,7 +22,7 @@ let products = [
         image: "img/product/ms.png",
         subject: "microsoft",
         location: "Dubai",
-        price: "$600",
+        price: 600,
         stock: 10,
     },
 
@@ -31,7 +31,7 @@ let products = [
         image: "img/product/cloud-computing.png",
         subject: "Cloud Computing",
         location: "London",
-        price: "$500",
+        price: 500,
         stock: 10,
     },
 
@@ -40,7 +40,7 @@ let products = [
         image: "img/product/database.png",
         subject: "Database",
         location: "London",
-        price: "$550",
+        price: 550,
         stock: 10,
     },
 
@@ -49,7 +49,7 @@ let products = [
         image: "img/product/redhat.png",
         subject: "redhat",
         location: "Mauritius",
-        price: "$350",
+        price: 350,
         stock: 10,
     },
 
@@ -58,7 +58,7 @@ let products = [
         image: "img/product/security.jpeg",
         subject: "Security",
         location: "Dubai",
-        price: "$600",
+        price: 600,
         stock: 10,
     },
 
@@ -67,7 +67,7 @@ let products = [
         image: "img/product/a.png",
         subject: "A+",
         location: "Malta",
-        price: "$450",
+        price: 450,
         stock: 10,
     },
 
@@ -76,7 +76,7 @@ let products = [
         image: "img/product/oracle.png",
         subject: "oracle",
         location: "London",
-        price: "$1000",
+        price: 1000,
         stock: 10,
     },
 
@@ -85,7 +85,7 @@ let products = [
         image: "img/product/pmp.jpg",
         subject: "Project Management",
         location: "Dubai",
-        price: "$600",
+        price: 600,
         stock: 10,
     },
 
